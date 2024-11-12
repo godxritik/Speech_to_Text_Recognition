@@ -13,8 +13,13 @@
 // function to copy text to clipboard
 function copyText() {
     const text = document.getElementById("txtBox");
-    text.select();
-    text.setSelectionRange(0, 99999); // For mobile devices
-    document.execCommand("copy");
+    // modern method
+    navigator.clipboard.writeText(text.value);
+
+    // depricated code --- no longer recommended to copy clipboard
+
+    // text.select();
+    // text.setSelectionRange(0, 99999); // For mobile devices
+    // document.execCommand("copy");
 
 }
