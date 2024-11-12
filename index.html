@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="hero">
+        <h1>Speech to <span>Text</span> Recognition</h1>
+        <textarea name="" id="txtBox" rows="15" cols="40"></textarea>
+        <div id="btnBox">
+            <button id="copyBtn" onclick="copyText()">Copy Text</button>
+        <button id="listenBtn" onclick="listen()"><img src="play.png" alt="">start listening</button>
+        </div>
+    </div>
+
+    <script>
+        // function to convert voice into text
+        function listen() {
+            let recognition = new webkitSpeechRecognition();
+            recognition.lang = "en-GB";
+            recognition.onresult = function (event) {
+                console.log(event);
+                document.getElementById("txtBox").value = event.results[0][0].transcript;
+            }
+
+            recognition.start();
+        }
+
+        // function to copy text to clipboard
+        function copyText() {
+            const text = document.getElementById("txtBox");
+            text.select();
+            text.setSelectionRange(0, 99999); // For mobile devices
+            document.execCommand("copy");
+
+        }
+
+
+    </script>
+
+</body>
+
+</html>
